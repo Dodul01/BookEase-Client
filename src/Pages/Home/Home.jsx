@@ -1,10 +1,11 @@
 import React from 'react'
 import Nav from '../../Components/Nav/Nav'
+import Banner from '../../Components/Banner/Banner'
 
 const Home = () => {
   return (
     <div>
-      <h1 className='text-3xl font-bold text-center'>Home Page...</h1>
+      <Banner />
     </div>
   )
 }
