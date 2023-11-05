@@ -22,7 +22,7 @@ const SpecialOffers = () => {
 
 
   return (
-    <div className='max-w-7xl mx-auto my-3 p-2'>
+    <div className='max-w-7xl mx-auto my-5 p-2'>
       <h1 className='text-2xl font-bold mb-2'>Special Offers For You</h1>
       <Swiper
         spaceBetween={30}
@@ -47,7 +47,7 @@ const SpecialOffers = () => {
                   <div>
                     <h1 className='text-4xl font-bold text-center my-3'>{specialOffer.room_name}</h1>
                     <p className='text-xl font-semibold text-center'>{specialOffer.description}</p>
-                    <div className='flex items-center justify-center gap-4 mb-3'>
+                    <div className='flex items-center justify-center flex-wrap gap-4 mb-3'>
                       <p>{specialOffer.special_offer}</p>
                       <p className='line-through'>Regular Price ${specialOffer.original_price} per night</p>
                       <p>Discount Price ${specialOffer.discount_price} per night</p>

@@ -3,6 +3,7 @@ import Nav from '../../Components/Nav/Nav'
 import Banner from '../../Components/Banner/Banner'
 import FeaturedRooms from '../../Components/FeaturedRooms/FeaturedRooms'
 import SpecialOffers from '../../Components/SpecialOffers/SpecialOffers'
+import NewsLetter from '../../Components/NewsLetter/NewsLetter'
 
 const Home = () => {
   return (
@@ -10,6 +11,7 @@ const Home = () => {
       <Banner />
       <FeaturedRooms />
       <SpecialOffers />
+      <NewsLetter />
     </div>
   )
 }
