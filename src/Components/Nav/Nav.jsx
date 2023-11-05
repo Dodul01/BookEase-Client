@@ -34,7 +34,7 @@ const Nav = () => {
             {links}
           </div>
           <div className='md:flex hidden'>
-            <NavLink className='text-white bg-[#34977d] flex items-center justify-center w-[120px] font-semibold p-2 rounded-full' to='/signUp'>Sign Up</NavLink>
+            <Link className='text-white bg-[#34977d] flex items-center justify-center w-[120px] font-semibold p-2 rounded-full' to='/signUp'>Sign Up</Link>
           </div>
           {/* Mobile Menu */}
           <div onClick={() => setIsMenuOpen(!isMenuOpen)} className='md:hidden flex'>

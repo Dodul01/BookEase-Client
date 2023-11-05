@@ -1,3 +1,9 @@
-.active{
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+.active {
   color: #34977d;
+}
+
+.font-roboto{
+  font-family: 'Roboto', sans-serif;
 }

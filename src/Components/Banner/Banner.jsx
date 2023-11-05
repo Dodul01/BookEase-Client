@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 const Banner = () => {
   return (
     <div className="relative h-[80vh] w-full ">
-      <div className="relative bg-fixed bg-[url('https://images.unsplash.com/photo-1598605272254-16f0c0ecdfa5?auto=format&fit=crop&q=80&w=1471&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] h-[80vh] w-full object-cover bg-center"></div>
+      <div className="relative bg-fixed bg-no-repeat bg-[url('https://images.unsplash.com/photo-1598605272254-16f0c0ecdfa5?auto=format&fit=crop&q=80&w=1471&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] h-[80vh] w- object-cover bg-center"></div>
       <div className="absolute top-0 left-0  h-full w-full bg-black opacity-50"></div>
       <div className="absolute top-5 left-0 w-full h-full">
         <div className="text-white max-w-7xl mx-auto h-full flex items-center justify-center flex-col">
