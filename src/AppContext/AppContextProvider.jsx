@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import React, { createContext, useEffect, useState } from 'react'
 import { getAuth } from 'firebase/auth';
 import app from '../firebase/firebase.config';
@@ -11,18 +11,31 @@ const AppContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const signUpUser = (email, password) => {
-    isLoading(true);
+    setIsLoading(true);
     return createUserWithEmailAndPassword(auth, email, password)
   }
 
+  const signOutUser = () => {
+    setIsLoading(true)
+    return signOut(auth)
+  }
+
+  const signInUser = ( email, password)=>{
+    setIsLoading(true);
+    return signInWithEmailAndPassword( auth, email, password);
+  }
+
   const appInfo = {
-    signUpUser
+    signUpUser,
+    user,
+    signOutUser,
+    signInUser
   }
 
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-       if (user) {
+      if (user) {
         setIsLoading(false);
         setUser(user)
         console.log(user);
@@ -31,7 +44,7 @@ const AppContextProvider = ({ children }) => {
         console.log('user not found');
       }
     })
-    return ()=>{
+    return () => {
       unsubscribe();
     }
   }, [])

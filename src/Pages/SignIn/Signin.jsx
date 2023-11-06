@@ -1,16 +1,27 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { FcGoogle } from 'react-icons/fc'
 import { Link } from 'react-router-dom'
+import { AppContext } from '../../AppContext/AppContextProvider'
 
 const Signin = () => {
+  const { signInUser } = useContext(AppContext);
 
   const handleSignIn = (e) => {
     e.preventDefault();
     const Form = e.target;
     const email = Form.email.value;
     const password = Form.password.value;
-    const user = {email, password};
+    const user = { email, password };
     console.log(user);
+    signInUser(email, password)
+      .then((userCredential) => {
+        console.log('sign in sucessfully');
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      });
     Form.reset()
   }
 
