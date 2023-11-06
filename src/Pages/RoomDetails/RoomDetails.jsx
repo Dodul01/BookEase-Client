@@ -5,6 +5,14 @@ const RoomDetails = () => {
   const [room, setRoom] = useState({});
   const { id } = useParams();
 
+  const handleDate = (e) =>{
+    const value = e.target.value.split('-');
+    const year = value[0]
+    const month = value[1]
+    const day = value[2]
+    const date = {year, month, day}
+    console.log(date);
+  }
 
   useEffect(() => {
     fetch(`http://localhost:5000/rooms/${id}`)
@@ -13,10 +21,10 @@ const RoomDetails = () => {
   }, [room])
 
   return (
-    <div className='min-h-screen max-w-7xl mx-auto mt-10'>
-      <div className='flex gap-3 p-1'>
+    <div className='min-h-screen max-w-7xl mx-auto my-10'>
+      <div className='flex lg:flex-row flex-col gap-3 p-1'>
         <div className='flex-1'>
-          <img className='rounded-lg' src={room?.room_image} alt="room_image" />
+          <img className='rounded-lg w-full' src={room?.room_image} alt="room_image" />
         </div>
         <div className='flex-1'>
           <div className='grid grid-cols-2 gap-3'>
@@ -24,18 +32,18 @@ const RoomDetails = () => {
           </div>
         </div>
       </div>
-      <div className='flex'>
-        <div className='w-3/4 p-1'>
+      <div className='flex lg:flex-row flex-col-reverse'>
+        <div className='lg:w-3/4  p-1'>
           <h1 className='text-2xl font-semibold mb-1'>{room?.name}</h1>
           <h3 className='text-lg font-medium mb-3'>Per Nignt ${room?.price} USD</h3>
           <p className='text-base text-gray-600 mb-1'>{room?.description}</p>
           <div>
             <p className='font-medium mb-1'>Choose a date</p>
-            <input className='mb-2 border border-[#34977d] outline-[#34977d] rounded-lg p-2' type="date" />
+            <input onChange={handleDate} className='mb-2 border border-[#34977d] outline-[#34977d] rounded-lg p-2' type="date" />
           </div>
           <button className='text-white bg-[#34977d] flex items-center justify-center w-full font-semibold p-2 rounded-lg'>Book Now</button>
         </div>
-        <div className='w-1/4 p-1'>
+        <div className='lg:w-1/4 p-1'>
           <h2 className='text-xl font-bold'>Room Details</h2>
           {room?.special_offers === '' ? '' :
             <h3 className='text-lg font-semibold'>Special Offer: {room?.special_offers}</h3>
