@@ -1,8 +1,11 @@
-import React from 'react'
+import { useContext } from 'react'
 import { FcGoogle } from 'react-icons/fc'
 import { Link } from 'react-router-dom'
-
+import { AppContext } from '../../AppContext/AppContextProvider'
+import { getAuth, updateProfile } from 'firebase/auth'
+import app from '../../firebase/firebase.config'
 const SignUp = () => {
+  const {signUpUser} = useContext(AppContext);
 
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -13,7 +16,19 @@ const SignUp = () => {
     const password = Form.password.value;
     const user = {name, email, imageUrl, password}
     
-    console.log(user);
+    const auth = getAuth(app);
+
+    signUpUser(email, password)
+      .then((userCredential)=>{
+        updateProfile(auth.currentUser, {
+          displayName: name,
+          photoURL: imageUrl
+        })
+        console.log(userCredential.user);
+      })
+      .catch((error)=>{
+        console.log(error);
+      })
     Form.reset();
   }
 
