@@ -2,7 +2,7 @@ import React from 'react'
 
 const NewsLetter = () => {
   return (
-    <div className='max-w-7xl mx-auto my-5 p-2'>
+    <div className='max-w-7xl mx-auto my-10 mb-16 p-2'>
       <h1 className='text-3xl font-bold text-center mb-1'>Save Time, Save Money</h1>
       <h3 className='text-2xl font-semibold text-center'>Subscribe Our News Letter</h3>
       <div className='flex item-center justify-center mt-4'>

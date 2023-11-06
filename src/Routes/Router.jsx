@@ -5,6 +5,9 @@ import Rooms from "../Pages/Rooms/Rooms";
 import MyBookings from "../Pages/MyBookings/MyBookings";
 import Error from "../Pages/ErrorPage/Error";
 import SignUp from "../Pages/SignUp/SignUp";
+import AboutUs from "../Pages/AboutUs/AboutUs";
+import Event from "../Pages/Event&Activity/Event";
+import RoomDetails from "../Pages/RoomDetails/RoomDetails";
 
 const router = createBrowserRouter([
   {
@@ -14,7 +17,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Home/>
+        element: <Home />
       },
       {
         path: '/rooms',
@@ -26,7 +29,19 @@ const router = createBrowserRouter([
       },
       {
         path: '/signUp',
-        element: <SignUp/>
+        element: <SignUp />
+      },
+      {
+        path: '/about',
+        element: <AboutUs />
+      },
+      {
+        path: '/event&activity',
+        element: <Event />
+      },
+      {
+        path: '/rooms/:id',
+        element: <RoomDetails />
       }
     ]
   }

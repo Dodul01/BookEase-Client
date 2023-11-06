@@ -7,10 +7,10 @@ const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const links = <>
     <NavLink className='mx-2 font-medium' to='/'>Home</NavLink>
-    <NavLink className='mx-2 font-medium' to='/'>About Us</NavLink>
-    <NavLink className='mx-2 font-medium' to='/'>Events & Activites</NavLink>
     <NavLink className='mx-2 font-medium' to='/rooms'>Rooms</NavLink>
     <NavLink className='mx-2 font-medium' to='/myBookings'>My Booking</NavLink>
+    <NavLink className='mx-2 font-medium' to='/event&activity'>Events & Activites</NavLink>
+    <NavLink className='mx-2 font-medium' to='/about'>About Us</NavLink>
   </>
 
   return (
