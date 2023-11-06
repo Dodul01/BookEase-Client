@@ -1,12 +1,12 @@
 import { useContext } from 'react'
 import { FcGoogle } from 'react-icons/fc'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { AppContext } from '../../AppContext/AppContextProvider'
 import { getAuth, updateProfile } from 'firebase/auth'
 import app from '../../firebase/firebase.config'
 const SignUp = () => {
-  const {signUpUser} = useContext(AppContext);
-
+  const {signUpUser, signInUsingGoogle} = useContext(AppContext);
+  const navigate = useNavigate()
   const handleSignUp = (e) => {
     e.preventDefault();
     const Form = e.target;
@@ -30,6 +30,19 @@ const SignUp = () => {
         console.log(error);
       })
     Form.reset();
+  }
+
+
+  const handleGoogleSignUp = () =>{
+    signInUsingGoogle()
+      .then((userCredential)=>{
+        if(userCredential.user){
+          navigate('/')
+        }
+      })
+      .catch((error)=>{
+        console.log(error);
+      })
   }
 
   return (
@@ -76,7 +89,7 @@ const SignUp = () => {
             <div className='px-8 py-4'>
               <hr />
               <p className='font-semibold text-center'>Continue With</p>
-              <button className=' flex items-center justify-center font-semibold border rounded-lg w-full p-2 mt-2 hover:bg-slate-200'><FcGoogle className='text-xl mr-0' />oogle</button>
+              <button onClick={handleGoogleSignUp} className=' flex items-center justify-center font-semibold border rounded-lg w-full p-2 mt-2 hover:bg-slate-200'><FcGoogle className='text-xl mr-0' />oogle</button>
             </div>
           </div>
         </div>

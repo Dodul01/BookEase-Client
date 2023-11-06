@@ -7,7 +7,8 @@ import { AppContext } from '../../AppContext/AppContextProvider';
 const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user , signOutUser} = useContext(AppContext);
-  
+  const [islogOut , setIsLogOut] = useState();
+
   const links = <>
     <NavLink className='mx-2 font-medium' to='/'>Home</NavLink>
     <NavLink className='mx-2 font-medium' to='/rooms'>Rooms</NavLink>
@@ -21,6 +22,7 @@ const Nav = () => {
     signOutUser()
       .then(()=>{
         console.log('sign out sucessfully');
+        setIsLogOut(true);
       })
       .catch((error)=>{
         console.log(error);
@@ -29,7 +31,7 @@ const Nav = () => {
 
   useEffect(()=>{
 
-  },[handleSignOut])
+  },[handleSignOut, islogOut])
 
   return (
     <div className=' bg-[#ffffff] z-40 py-4 px-2'>

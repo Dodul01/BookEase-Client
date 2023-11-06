@@ -1,10 +1,12 @@
 import React, { useContext } from 'react'
 import { FcGoogle } from 'react-icons/fc'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { AppContext } from '../../AppContext/AppContextProvider'
 
 const Signin = () => {
-  const { signInUser } = useContext(AppContext);
+  const { signInUser, signInUsingGoogle } = useContext(AppContext);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleSignIn = (e) => {
     e.preventDefault();
@@ -13,9 +15,13 @@ const Signin = () => {
     const password = Form.password.value;
     const user = { email, password };
     console.log(user);
+
     signInUser(email, password)
       .then((userCredential) => {
         console.log('sign in sucessfully');
+        if (userCredential.user) {
+          navigate(location?.state ? location?.state : '/')
+        }
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -23,6 +29,18 @@ const Signin = () => {
         console.log(errorMessage);
       });
     Form.reset()
+  }
+
+  const handleGoogleSignUp = () => {
+    signInUsingGoogle()
+      .then((userCredential) => {
+        if (userCredential.user) {
+          navigate('/')
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
   }
 
   return (
@@ -57,7 +75,7 @@ const Signin = () => {
             <div className='px-8 py-4'>
               <hr />
               <p className='font-semibold text-center'>Continue With</p>
-              <button className=' flex items-center justify-center font-semibold border rounded-lg w-full p-2 mt-2 hover:bg-slate-200'><FcGoogle className='text-xl mr-0' />oogle</button>
+              <button onClick={handleGoogleSignUp} className=' flex items-center justify-center font-semibold border rounded-lg w-full p-2 mt-2 hover:bg-slate-200'><FcGoogle className='text-xl mr-0' />oogle</button>
             </div>
           </div>
         </div>

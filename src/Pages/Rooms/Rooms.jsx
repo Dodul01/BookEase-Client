@@ -50,7 +50,7 @@ const Rooms = () => {
       </div>
       <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 mt-3'>
         {rooms.map((room) => {
-          return <RoomCard key={room._id} room={room} />
+          return room.seats >= 1 && <RoomCard key={room._id} room={room} />
         })}
       </div>
     </div>
