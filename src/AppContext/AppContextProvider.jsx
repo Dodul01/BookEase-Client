@@ -11,6 +11,7 @@ const AppContextProvider = ({ children }) => {
   const auth = getAuth(app);
   const [isLoading, setIsLoading] = useState(true);
   const googleProvider = new GoogleAuthProvider()
+  
   const signUpUser = (email, password) => {
     setIsLoading(true);
     return createUserWithEmailAndPassword(auth, email, password)
@@ -27,6 +28,7 @@ const AppContextProvider = ({ children }) => {
   }
 
   const signInUsingGoogle = () =>{
+    setIsLoading(true)
     return signInWithPopup(auth, googleProvider)
   }
 
@@ -37,7 +39,8 @@ const AppContextProvider = ({ children }) => {
     signOutUser,
     signInUser,
     isLoading,
-    signInUsingGoogle
+    signInUsingGoogle,
+    setUser
   }
 
 
@@ -46,7 +49,6 @@ const AppContextProvider = ({ children }) => {
       if (user) {
         setIsLoading(false);
         setUser(user)
-        console.log(user);
       } else {
         setIsLoading(false)
         console.log('user not found');

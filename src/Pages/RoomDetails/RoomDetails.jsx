@@ -1,6 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { AppContext } from '../../AppContext/AppContextProvider';
+import moment from 'moment/moment';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const RoomDetails = () => {
   const { user } = useContext(AppContext);
@@ -9,18 +12,12 @@ const RoomDetails = () => {
   const navigate = useNavigate();
   const [date, setDate] = useState(null);
 
-  const handleBooking = () => {
-    // const bookedRoom = {
-    //   name: room.name,
-    //   room_image: room.room_image,
-    //   description: room.description,
-    //   price: room.price,
-    //   room_size: room.room_size,
-    //   special_offers: room.special_offers,
-    //   room_rating: room.room_rating,
-    //   roomId: room._id
-    // }
+  const minDate = () => {
+    const today = new Date().toISOString().split('T')[0];
+    return today;
+  };
 
+  const handleBooking = () => {
     if (date === null) {
       return alert('select a date to book room')
     }
@@ -45,7 +42,7 @@ const RoomDetails = () => {
       })
         .then((response) => {
           console.log(response);
-          console.log('room booked sucessfully');
+          alert('room booked sucessfully');
         })
         .catch((error) => {
           console.log(error);
@@ -56,12 +53,12 @@ const RoomDetails = () => {
   }
 
   const handleDate = (e) => {
-    const value = e.target.value.split('-');
-    const year = value[0]
-    const month = value[1]
-    const day = value[2]
-    const dateValue = { year, month, day }
-    setDate(dateValue);
+    // const value = e.target.value.split('-');
+    // const year = value[0]
+    // const month = value[1]
+    // const day = value[2]
+    // const dateValue = { year, month, day }
+    // setDate(dateValue);
   }
 
   useEffect(() => {
@@ -89,7 +86,15 @@ const RoomDetails = () => {
           <p className='text-base text-gray-600 mb-1'>{room?.description}</p>
           <div>
             <p className='font-medium mb-1'>Choose a date</p>
-            <input onChange={handleDate} className='mb-2 border border-[#34977d] outline-[#34977d] rounded-lg p-2' type="date" />
+            {/* <input onChange={handleDate} className='mb-2 border border-[#34977d] outline-[#34977d] rounded-lg p-2' type="date" /> */}
+            {/* <input onChange={handleDate} className='mb-2 border border-[#34977d] outline-[#34977d] rounded-lg p-2' type="date" /> */}
+            <input
+              type="date"
+              className='mb-2 border border-[#34977d] outline-[#34977d] rounded-lg p-2'
+              value={date}
+              min={minDate()}
+              onChange={(e) => setDate(e.target.value)}
+            />
           </div>
           <button onClick={handleBooking} className='text-white bg-[#34977d] flex items-center justify-center w-full font-semibold p-2 rounded-lg'>Book Now</button>
         </div>
@@ -100,11 +105,15 @@ const RoomDetails = () => {
           }
           <h3>Room Size: {room?.room_size}</h3>
           <p>Status: {room?.availability === true ? 'Available' : 'Not Available'}</p>
+          <p>Seats Available: {room.seats}</p>
         </div>
       </div>
       <div className='my-4'>
         <h1>Review Section</h1>
-        <div></div>
+        <div>
+          {/* <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} /> */}
+          {/* <DatePicker selected={date} onChange={(dateR) => setDate(dateR)}  /> */}
+        </div>
         <div>
           <h3>Total Review : 0</h3>
         </div>
