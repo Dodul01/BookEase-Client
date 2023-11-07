@@ -2,13 +2,14 @@ import React, { useContext, useEffect, useState } from 'react'
 import { AppContext } from '../../AppContext/AppContextProvider'
 import moment from 'moment/moment';
 import Swal from 'sweetalert2';
+import Modal from '../../Components/Modal/Modal';
+import toast from 'react-hot-toast';
 
 const MyBookings = () => {
   const [bookings, setBookings] = useState([]);
   const { user } = useContext(AppContext);
   const today = moment().format('YYYY-MM-DD');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [confirmDelete, setConfirmDelete] = useState(false);
   const [singleBooking, setSingleBooking] = useState(null);
 
   if (user === null) {
@@ -16,12 +17,10 @@ const MyBookings = () => {
   }
 
   const handleCancelBooking = (id, bookingDate) => {
-    setIsModalOpen(true);
-
     if (today === bookingDate) {
-      return alert('you can not cancel the booking')
+      return toast.error('you can not cancel the booking')
     } else if (bookingDate.split('-')[2] - (moment().format('DD') - 1) === 2) {
-      return alert('can not cancel 24 hour before')
+      return toast.error('can not cancel 24 hour before')
     }
 
     Swal.fire({
@@ -34,19 +33,12 @@ const MyBookings = () => {
       confirmButtonText: "Yes, delete it!"
     }).then((result) => {
       if (result.isConfirmed) {
-        // if (today === bookingDate) {
-        //   return alert('you can not cancel the booking')
-        // } else if (bookingDate.split('-')[2] - (moment().format('DD') - 1) === 2) {
-        //   return alert('can not cancel 24 hour before')
-        // }
-
         fetch(`http://localhost:5000/bookingRoom/${id}`, {
           method: 'DELETE',
         })
           .then(res => res.json())
           .then(data => {
             if (data.deletedCount) {
-              // alert('booking cancled sucessfuly')
               const remainingBooking = bookings.filter((booking) => booking._id !== id);
               setBookings(remainingBooking);
             }
@@ -64,14 +56,14 @@ const MyBookings = () => {
 
   const handleUpdateBooking = (id, booking) => {
     setIsModalOpen(true);
-    setSingleBooking(booking)
+    setSingleBooking(booking);
   }
 
   useEffect(() => {
     fetch(`http://localhost:5000/bookingRoom?email=${user.email}`)
       .then((response) => response.json())
       .then(data => setBookings(data))
-  }, [user])
+  }, [user, isModalOpen])
 
   return (
     <div className='mt-6 min-h-screen p-2'>
@@ -95,8 +87,7 @@ const MyBookings = () => {
           </div>
         })}
       </div>
-
-        {/* modal element here */}
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} booking={singleBooking} />
     </div>
   )
 }

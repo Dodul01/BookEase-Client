@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { FcGoogle } from 'react-icons/fc'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { AppContext } from '../../AppContext/AppContextProvider'
+import toast from 'react-hot-toast'
 
 const Signin = () => {
   const { signInUser, signInUsingGoogle } = useContext(AppContext);
@@ -18,7 +19,7 @@ const Signin = () => {
 
     signInUser(email, password)
       .then((userCredential) => {
-        console.log('sign in sucessfully');
+        toast.success('sign in sucessfully');
         if (userCredential.user) {
           navigate(location?.state ? location?.state : '/')
         }
@@ -36,6 +37,7 @@ const Signin = () => {
       .then((userCredential) => {
         if (userCredential.user) {
           navigate('/')
+          toast.success('Sign In Sucessfully')
         }
       })
       .catch((error) => {

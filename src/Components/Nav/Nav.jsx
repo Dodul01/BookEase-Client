@@ -2,12 +2,12 @@ import React, { useContext, useEffect, useState } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import { BsFillMenuButtonWideFill } from 'react-icons/bs'
 import { AppContext } from '../../AppContext/AppContextProvider';
+import toast from 'react-hot-toast';
 
 
 const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user , signOutUser, setUser} = useContext(AppContext);
-  const [islogOut , setIsLogOut] = useState();
 
   const links = <>
     <NavLink className='mx-2 font-medium' to='/'>Home</NavLink>
@@ -21,7 +21,7 @@ const Nav = () => {
   const handleSignOut = () =>{
     signOutUser()
       .then(()=>{
-        alert('sign out sucessfully');
+        toast.success('Sign out sucessfully');
         setUser(null)
       })
       .catch((error)=>{

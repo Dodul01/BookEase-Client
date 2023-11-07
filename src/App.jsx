@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom'
 import './App.css'
 import Nav from './Components/Nav/Nav'
 import Footer from './Components/Footer/Footer'
+import { Toaster } from 'react-hot-toast'
 
 function App() {
 
@@ -9,6 +10,7 @@ function App() {
     <div>
       <Nav />
       <Outlet />
+      <Toaster />
       <Footer />
     </div>
   )

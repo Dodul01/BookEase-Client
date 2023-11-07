@@ -1,9 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { AppContext } from '../../AppContext/AppContextProvider';
-import moment from 'moment/moment';
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import toast from 'react-hot-toast';
 
 const RoomDetails = () => {
   const { user } = useContext(AppContext);
@@ -19,7 +18,7 @@ const RoomDetails = () => {
 
   const handleBooking = () => {
     if (date === null) {
-      return alert('select a date to book room')
+      return toast.error('select a date to book room')
     }
 
     if (user) {
@@ -42,7 +41,7 @@ const RoomDetails = () => {
       })
         .then((response) => {
           console.log(response);
-          alert('room booked sucessfully');
+          toast.success('room booked sucessfully');
         })
         .catch((error) => {
           console.log(error);
@@ -52,14 +51,14 @@ const RoomDetails = () => {
     }
   }
 
-  const handleDate = (e) => {
-    // const value = e.target.value.split('-');
-    // const year = value[0]
-    // const month = value[1]
-    // const day = value[2]
-    // const dateValue = { year, month, day }
-    // setDate(dateValue);
-  }
+  // const handleDate = (e) => {
+  //   // const value = e.target.value.split('-');
+  //   // const year = value[0]
+  //   // const month = value[1]
+  //   // const day = value[2]
+  //   // const dateValue = { year, month, day }
+  //   // setDate(dateValue);
+  // }
 
   useEffect(() => {
     fetch(`http://localhost:5000/rooms/${id}`)
