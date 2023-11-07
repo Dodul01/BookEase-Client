@@ -10,6 +10,8 @@ const RoomDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [date, setDate] = useState(null);
+  const [bookedRoom, setBookedRoom] = useState([]);
+  const [message, setMessage] = useState(false);
 
   const minDate = () => {
     const today = new Date().toISOString().split('T')[0];
@@ -51,14 +53,35 @@ const RoomDetails = () => {
     }
   }
 
-  // const handleDate = (e) => {
-  //   // const value = e.target.value.split('-');
-  //   // const year = value[0]
-  //   // const month = value[1]
-  //   // const day = value[2]
-  //   // const dateValue = { year, month, day }
-  //   // setDate(dateValue);
-  // }
+  const handlePostReview = (e) => {
+    e.preventDefault();
+    const review = e.target.review.value;
+
+    fetch(`http://localhost:5000/bookingRoom?email=${user.email}`)
+      .then(res => res.json())
+      .then(result => {
+        setBookedRoom(result)
+      })
+
+
+    if (!user) {
+      toast.error("You can't review the room without logging in.");
+    } else if (bookedRoom.length === 0) {
+      toast.error("You can't review the room without booking.");
+    } else {
+      const isRoomBooked = bookedRoom.some(singleRoom => singleRoom.name === room.name);
+
+
+      if (isRoomBooked) {
+        toast.success("You can review the room.");
+
+        
+        console.log(review);
+      } else {
+        toast.error("You can only review a room you have booked.");
+      }
+    }
+  }
 
   useEffect(() => {
     fetch(`http://localhost:5000/rooms/${id}`)
@@ -85,8 +108,6 @@ const RoomDetails = () => {
           <p className='text-base text-gray-600 mb-1'>{room?.description}</p>
           <div>
             <p className='font-medium mb-1'>Choose a date</p>
-            {/* <input onChange={handleDate} className='mb-2 border border-[#34977d] outline-[#34977d] rounded-lg p-2' type="date" /> */}
-            {/* <input onChange={handleDate} className='mb-2 border border-[#34977d] outline-[#34977d] rounded-lg p-2' type="date" /> */}
             <input
               type="date"
               className='mb-2 border border-[#34977d] outline-[#34977d] rounded-lg p-2'
@@ -108,13 +129,35 @@ const RoomDetails = () => {
         </div>
       </div>
       <div className='my-4'>
-        <h1>Review Section</h1>
-        <div>
-          {/* <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} /> */}
-          {/* <DatePicker selected={date} onChange={(dateR) => setDate(dateR)}  /> */}
-        </div>
-        <div>
-          <h3>Total Review : 0</h3>
+        <h1 className='text-xl font-semibold'>Write a review For this room</h1>
+        <div className='flex lg:flex-row flex-col gap-3 p-2'>
+          <div className='flex-1'>
+            <form onSubmit={handlePostReview} className='flex flex-col'>
+              <textarea className='border rounded-lg p-2 outline-[#34977d] border-[#34977d] w-[97%] m-1' name="review" cols="10" rows="5" placeholder="Write Your Review Here..."></textarea>
+              <button className='text-white bg-[#34977d] flex items-center justify-center w-[120px] font-semibold p-2 rounded-full'>Post Review</button>
+            </form>
+          </div>
+
+          <div className='flex-1'>
+            <h3 className='text-xl font-semibold'>Total Review : {room?.reviews?.length}</h3>
+            <div className='flex flex-col gap-2 mt-4'>
+              {
+                room?.reviews?.map((review) => {
+                  return <div className='bg-base-100 p-2 rounded-lg border shadow'>
+                    <div className='flex'>
+                      <img className='h-[50px] w-[50px] rounded-lg' src={review?.user_image} alt="" />
+                      <div className='ml-4 w-full mb-5'>
+                        <h1>{review?.name}</h1>
+                        <p>{review?.booking_info?.date}</p>
+                        <hr />
+                      </div>
+                    </div>
+                    <p className='text-lg font-semibold'>{review?.review}</p>
+                  </div>
+                })
+              }
+            </div>
+          </div>
         </div>
       </div>
     </div>

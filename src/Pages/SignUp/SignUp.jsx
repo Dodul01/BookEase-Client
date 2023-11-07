@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { AppContext } from '../../AppContext/AppContextProvider'
 import { getAuth, updateProfile } from 'firebase/auth'
 import app from '../../firebase/firebase.config'
+import toast from 'react-hot-toast'
 const SignUp = () => {
   const {signUpUser, signInUsingGoogle} = useContext(AppContext);
   const navigate = useNavigate()
@@ -14,7 +15,7 @@ const SignUp = () => {
     const email = Form.email.value;
     const imageUrl = Form.imageURL.value;
     const password = Form.password.value;
-    const user = {name, email, imageUrl, password}
+    // const user = {name, email, imageUrl, password}
     
     const auth = getAuth(app);
 
@@ -24,7 +25,7 @@ const SignUp = () => {
           displayName: name,
           photoURL: imageUrl
         })
-        console.log(userCredential.user);
+        toast.success('Sign Up Sucessfully.')
       })
       .catch((error)=>{
         console.log(error);
@@ -37,6 +38,7 @@ const SignUp = () => {
     signInUsingGoogle()
       .then((userCredential)=>{
         if(userCredential.user){
+          toast.success('Sign Up Sucessfuly')
           navigate('/')
         }
       })

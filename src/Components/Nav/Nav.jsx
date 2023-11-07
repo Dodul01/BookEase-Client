@@ -64,7 +64,7 @@ const Nav = () => {
           </div>
 
           <div className={`md:hidden flex flex-col absolute top-12 ${isMenuOpen ? 'left-0' : 'left-[-100%]'} bg-white pb-5 transition-all w-[100%] p-2`}>
-            <Link to='/profile' className='flex lg:hidden items-center justify-center gap-3 cursor-pointer ml-2 border p-2 rounded-full mb-5 max-w-[150px]'>
+            <Link to='/' className='flex lg:hidden items-center justify-center gap-3 cursor-pointer ml-2 border p-2 rounded-full mb-5 max-w-[150px]'>
               <img className='h-[30px] rounded-full' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7YPYthUncyoMocgioGoDRStcp9SUvL36I5A&usqp=CAU" alt="" />
               <strong>User Name</strong>
             </Link>
