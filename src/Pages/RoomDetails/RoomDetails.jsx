@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import toast from 'react-hot-toast';
 import moment from 'moment/moment';
 import { Helmet } from 'react-helmet-async';
+import Swal from 'sweetalert2';
 
 
 const RoomDetails = () => {
@@ -18,10 +19,10 @@ const RoomDetails = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
 
-    const minDate = () => {
-      const today = new Date().toISOString().split('T')[0];
-      return today;
-    };
+  const minDate = () => {
+    const today = new Date().toISOString().split('T')[0];
+    return today;
+  };
 
   const handleBooking = () => {
     if (date === null) {
@@ -38,26 +39,50 @@ const RoomDetails = () => {
         newSeatsValue: UpdateSeatsValue
       }
 
+      Swal.fire({
+        title: "Do you want to book this room?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: "#34977d",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+        html: `
+              <p>${room.name}</p>
+              <p>Your Booking Date: ${date}</p>
+              <p>Room Size: ${room.room_size}</p>
+              <p>Price : ${room.price}</p>
+              <p>${room.description}</p>
+              
+            `
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: "Room Booked Sucessfuly",
+            icon: "success",
+          });
+          fetch('http://localhost:5000/bookingRoom', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+          })
+            .then((response) => {
+              // console.log(response);
+              toast.success('room booked sucessfully');
+            })
+            .catch((error) => {
+              console.log(error);
+            })
+        }
+      });
 
-      fetch('http://localhost:5000/bookingRoom', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data)
-      })
-        .then((response) => {
-          // console.log(response);
-          toast.success('room booked sucessfully');
-        })
-        .catch((error) => {
-          console.log(error);
-        })
+
     } else {
       navigate('/signUp')
     }
   }
-  console.log(room);
+
   const handlePostReview = (e) => {
     e.preventDefault();
     const review = e.target.review.value;
@@ -206,7 +231,7 @@ const RoomDetails = () => {
                       <img className='h-[50px] w-[50px] rounded-full object-cover' src={review?.user_image} alt="" />
                       <div className='ml-4 w-full mb-5'>
                         <h1 className='font-semibold text-lg'>{review?.name}</h1>
-                        <p>{review?.booking_info?.date}</p>
+                        <p>{review?.date}</p>
                         <div className='flex gap-2'>
                           <p>({room?.reviews[i].rating})</p>
                           <div className="rating rating-md">

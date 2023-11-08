@@ -29,6 +29,8 @@ const Nav = () => {
       })
   }
 
+  useEffect(()=>{},[user])
+
   return (
     <div className=' bg-[#ffffff] z-40 py-4 px-2'>
 

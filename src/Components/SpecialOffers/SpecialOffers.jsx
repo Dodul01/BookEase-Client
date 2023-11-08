@@ -22,7 +22,7 @@ const SpecialOffers = () => {
 
 
   return (
-    <div data-aos="fade-down" className='max-w-7xl mx-auto my-5 p-2'>
+    <div data-aos="fade-up" className='max-w-7xl mx-auto my-5 p-2'>
       <h1 className='text-2xl font-bold mb-2'>Special Offers For You</h1>
       <Swiper
         spaceBetween={30}

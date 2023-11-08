@@ -29,7 +29,7 @@ const MyBookings = () => {
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
+      confirmButtonColor: "#34977d",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!"
     }).then((result) => {
@@ -64,7 +64,7 @@ const MyBookings = () => {
     fetch(`http://localhost:5000/bookingRoom?email=${user.email}`)
       .then((response) => response.json())
       .then(data => setBookings(data))
-  }, [user, isModalOpen])
+  }, [user,  bookings])
 
   return (
     <div className='mt-6 min-h-screen p-2'>
