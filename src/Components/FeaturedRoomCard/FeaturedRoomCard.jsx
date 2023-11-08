@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const FeaturedRoomCard = ({ featuredRoom }) => {
   const { name, price, description, room_image, special_offers ,_id} = featuredRoom;
-  console.log(featuredRoom);
+
   return (
     <div className='shadow-2xl rounded-xl'>
       <div className='relative'>

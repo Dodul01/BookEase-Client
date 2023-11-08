@@ -5,7 +5,6 @@ import FeaturedRoomCard from "../FeaturedRoomCard/FeaturedRoomCard";
 const FeaturedRooms = () => {
   const [featuredRooms, setFeaturedRooms] = useState([]);
   const rooms = featuredRooms?.slice(0, 6);
-  console.log(rooms);
 
   useEffect(() => {
     fetch('http://localhost:5000/rooms')

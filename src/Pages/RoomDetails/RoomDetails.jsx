@@ -15,8 +15,7 @@ const RoomDetails = () => {
   const [isReviewed, setIsReviewed] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
-  console.log(room);
-
+  console.log(moment().format('YYYY-MM-DD'));
   const minDate = () => {
     const today = new Date().toISOString().split('T')[0];
     return today;
@@ -56,13 +55,11 @@ const RoomDetails = () => {
       navigate('/signUp')
     }
   }
-
-
-
+  console.log(room);
   const handlePostReview = (e) => {
     e.preventDefault();
     const review = e.target.review.value;
-    console.log(bookedRoom);
+    const ratings = e.target.ratings.value;
 
     if (!user) {
       toast.error("You can't review the room without logging in.");
@@ -77,9 +74,10 @@ const RoomDetails = () => {
           name: user?.displayName,
           user_image: user.photoURL,
           review: review,
-          date: moment().from('YYYY-MM-DD')
-        }        
-        
+          rating: ratings,
+          date: moment().format('YYYY-MM-DD')
+        }
+
         fetch(`http://localhost:5000/addReview/${room._id}`, {
           method: 'POST',
           headers: {
@@ -87,11 +85,11 @@ const RoomDetails = () => {
           },
           body: JSON.stringify(userReview)
         })
-        .then((response) => {
-          response.json();
-        })
-        .then((result) => setIsReviewed(result))
-        
+          .then((response) => {
+            response.json();
+          })
+          .then((result) => setIsReviewed(result))
+
         toast.success("Review sucessfully added.");
         e.target.reset()
       } else {
@@ -106,7 +104,7 @@ const RoomDetails = () => {
       .then(data => setRoom(data))
 
 
-    if(room?.seats == 0){
+    if (room?.seats == 0) {
       setIsButtonDisabled(true)
     }
 
@@ -134,7 +132,19 @@ const RoomDetails = () => {
       <div className='flex lg:flex-row flex-col-reverse'>
         <div className='lg:w-3/4  p-1'>
           <h1 className='text-2xl font-semibold mb-1'>{room?.name}</h1>
-          <h3 className='text-lg font-medium mb-3'>Per Nignt ${room?.price} USD</h3>
+          <h3 className='text-lg font-medium mb-1'>Per Nignt ${room?.price} USD</h3>
+
+          <div className='flex gap-1 mb-3'>
+            <div className="rating rating-md">
+              <input type="radio" name="rating-7" className={`mask mask-star-2 ${room?.room_rating >= 1 ? ' bg-orange-400' : 'bg-slate-300'}`} />
+              <input type="radio" name="rating-7" className={`mask mask-star-2 ${room?.room_rating >= 2 ? ' bg-orange-400' : 'bg-slate-300'}`} />
+              <input type="radio" name="rating-7" className={`mask mask-star-2 ${room?.room_rating >= 3 ? ' bg-orange-400' : 'bg-slate-300'}`} />
+              <input type="radio" name="rating-7" className={`mask mask-star-2 ${room?.room_rating >= 4 ? ' bg-orange-400' : 'bg-slate-300'}`} />
+              <input type="radio" name="rating-7" className={`mask mask-star-2 ${room?.room_rating >= 5 ? ' bg-orange-400' : 'bg-slate-300'}`} />
+            </div>
+            <p>( {room?.room_rating} )</p>
+          </div>
+
           <p className='text-base text-gray-600 mb-1'>{room?.description}</p>
           <div>
             <p className='font-medium mb-1'>Choose a date</p>
@@ -163,6 +173,17 @@ const RoomDetails = () => {
         <div className='flex lg:flex-row flex-col gap-3 p-2'>
           <div className='flex-1'>
             <form onSubmit={handlePostReview} className='flex flex-col'>
+              <div>
+                <p className='text-lg font-semibold ml-1'>Rating</p>
+                <select name='ratings' className='border border-[#34977d] w-[97%] rounded-lg p-2 m-1 outline-[#34977d]'>
+                  <option value='1'>1</option>
+                  <option value='2'>2</option>
+                  <option value='3'>3</option>
+                  <option value='4'>4</option>
+                  <option value='5'>5</option>
+                </select>
+              </div>
+              <p className='text-lg font-semibold ml-1'>Comment</p>
               <textarea className='border rounded-lg p-2 outline-[#34977d] border-[#34977d] w-[97%] m-1' name="review" cols="10" rows="5" placeholder="Write Your Review Here..."></textarea>
               <button className='text-white bg-[#34977d] flex items-center justify-center w-[120px] font-semibold p-2 rounded-full'>Post Review</button>
             </form>
@@ -172,17 +193,27 @@ const RoomDetails = () => {
             <h3 className='text-xl font-semibold'>Total Review : {room?.reviews?.length}</h3>
             <div className='flex flex-col gap-2 mt-4'>
               {
-                room?.reviews?.map((review) => {
+                room?.reviews?.map((review, i) => {
                   return <div className='bg-base-100 p-2 rounded-lg border shadow'>
                     <div className='flex'>
                       <img className='h-[50px] w-[50px] rounded-full object-cover' src={review?.user_image} alt="" />
                       <div className='ml-4 w-full mb-5'>
-                        <h1>{review?.name}</h1>
+                        <h1 className='font-semibold text-lg'>{review?.name}</h1>
                         <p>{review?.booking_info?.date}</p>
+                        <div className='flex gap-2'>
+                          <p>({room?.reviews[i].rating})</p>
+                          <div className="rating rating-md">
+                            <input type="radio" name="rating-7" className={`mask mask-star-2 ${room?.reviews[i]?.rating >= 1 ? ' bg-orange-400' : 'bg-slate-300'}`} />
+                            <input type="radio" name="rating-7" className={`mask mask-star-2 ${room?.reviews[i]?.rating >= 2 ? ' bg-orange-400' : 'bg-slate-300'}`} />
+                            <input type="radio" name="rating-7" className={`mask mask-star-2 ${room?.reviews[i]?.rating >= 3 ? ' bg-orange-400' : 'bg-slate-300'}`} />
+                            <input type="radio" name="rating-7" className={`mask mask-star-2 ${room?.reviews[i]?.rating >= 4 ? ' bg-orange-400' : 'bg-slate-300'}`} />
+                            <input type="radio" name="rating-7" className={`mask mask-star-2 ${room?.reviews[i]?.rating >= 5 ? ' bg-orange-400' : 'bg-slate-300'}`} />
+                          </div>
+                        </div>
                         <hr />
                       </div>
                     </div>
-                    <p className='text-lg font-semibold'>{review?.review}</p>
+                    <p className='text-lg font-medium ml-16'>{review?.review}</p>
                   </div>
                 })
               }
