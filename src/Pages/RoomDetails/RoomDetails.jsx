@@ -60,7 +60,7 @@ const RoomDetails = () => {
             title: "Room Booked Sucessfuly",
             icon: "success",
           });
-          fetch('http://localhost:5000/bookingRoom', {
+          fetch('https://assignment-11-server-lac-xi.vercel.app/bookingRoom', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -105,7 +105,7 @@ const RoomDetails = () => {
           date: moment().format('YYYY-MM-DD')
         }
 
-        fetch(`http://localhost:5000/addReview/${room._id}`, {
+        fetch(`https://assignment-11-server-lac-xi.vercel.app/addReview/${room._id}`, {
           method: 'POST',
           headers: {
             'content-type': 'application/json'
@@ -126,7 +126,7 @@ const RoomDetails = () => {
   }
 
   useEffect(() => {
-    fetch(`http://localhost:5000/rooms/${id}`)
+    fetch(`https://assignment-11-server-lac-xi.vercel.app/rooms/${id}`)
       .then(response => response.json())
       .then(data => setRoom(data))
 
@@ -136,7 +136,7 @@ const RoomDetails = () => {
     }
 
     if (user) {
-      fetch(`http://localhost:5000/bookingRoom?email=${user.email}`)
+      fetch(`https://assignment-11-server-lac-xi.vercel.app/bookingRoom?email=${user.email}`)
         .then(res => res.json())
         .then(result => {
           setBookedRoom(result)

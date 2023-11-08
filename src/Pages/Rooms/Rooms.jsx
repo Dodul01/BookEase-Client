@@ -28,7 +28,7 @@ const Rooms = () => {
   }
 
   useEffect(() => {
-    fetch('http://localhost:5000/rooms')
+    fetch('https://assignment-11-server-lac-xi.vercel.app/rooms')
       .then(response => response.json())
       .then(data => {
         setRooms(data);

@@ -14,7 +14,7 @@ const SpecialOffers = () => {
 
 
   useEffect(() => {
-    fetch('http://localhost:5000/specialOffers')
+    fetch('https://assignment-11-server-lac-xi.vercel.app/specialOffers')
       .then(response => response.json())
       .then(result => setSpecialOffers(result));
   }, [])

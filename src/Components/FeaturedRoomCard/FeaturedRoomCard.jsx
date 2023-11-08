@@ -5,7 +5,7 @@ const FeaturedRoomCard = ({ featuredRoom }) => {
   const { name, price, description, room_image, special_offers ,_id} = featuredRoom;
 
   return (
-    <div data-aos="fade-up" className='shadow-2xl rounded-xl'>
+    <div data-aos="fade-up" className='shadow-2xl rounded-xl m-1'>
       <div className='relative'>
         {special_offers !== '' ?
           <p className='absolute top-2 right-2 font-semibold bg-slate-900 text-white p-1 max-w-[320px] rounded-lg'>{special_offers}</p>

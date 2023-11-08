@@ -34,7 +34,7 @@ const MyBookings = () => {
       confirmButtonText: "Yes, delete it!"
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/bookingRoom/${id}`, {
+        fetch(`https://assignment-11-server-lac-xi.vercel.app/bookingRoom/${id}`, {
           method: 'DELETE',
         })
           .then(res => res.json())
@@ -61,7 +61,7 @@ const MyBookings = () => {
   }
 
   useEffect(() => {
-    fetch(`http://localhost:5000/bookingRoom?email=${user.email}`)
+    fetch(`https://assignment-11-server-lac-xi.vercel.app/bookingRoom?email=${user.email}`)
       .then((response) => response.json())
       .then(data => setBookings(data))
   }, [user,  bookings])

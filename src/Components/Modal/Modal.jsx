@@ -17,7 +17,7 @@ const Modal = ({ isOpen, onClose, booking }) => {
       toast.error('select a date')
     }
 
-    fetch(`http://localhost:5000/updateBooking/${booking._id}`,{
+    fetch(`https://assignment-11-server-lac-xi.vercel.app/updateBooking/${booking._id}`,{
       method: 'PUT',
       headers: {
         'content-type': 'application/json'
