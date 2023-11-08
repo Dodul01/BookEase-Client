@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { AppContext } from '../../AppContext/AppContextProvider';
 import "react-datepicker/dist/react-datepicker.css";
 import toast from 'react-hot-toast';
+import moment from 'moment/moment';
 
 const RoomDetails = () => {
   const { user } = useContext(AppContext);
@@ -11,7 +12,7 @@ const RoomDetails = () => {
   const navigate = useNavigate();
   const [date, setDate] = useState(null);
   const [bookedRoom, setBookedRoom] = useState([]);
-  const [message, setMessage] = useState(false);
+  const [isReviewed, setIsReviewed] = useState(false);
 
   const minDate = () => {
     const today = new Date().toISOString().split('T')[0];
@@ -42,7 +43,7 @@ const RoomDetails = () => {
         body: JSON.stringify(data)
       })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           toast.success('room booked sucessfully');
         })
         .catch((error) => {
@@ -53,16 +54,12 @@ const RoomDetails = () => {
     }
   }
 
+
+
   const handlePostReview = (e) => {
     e.preventDefault();
     const review = e.target.review.value;
-
-    fetch(`http://localhost:5000/bookingRoom?email=${user.email}`)
-      .then(res => res.json())
-      .then(result => {
-        setBookedRoom(result)
-      })
-
+    console.log(bookedRoom);
 
     if (!user) {
       toast.error("You can't review the room without logging in.");
@@ -73,10 +70,27 @@ const RoomDetails = () => {
 
 
       if (isRoomBooked) {
-        toast.success("You can review the room.");
-
+        const userReview = {
+          name: user?.displayName,
+          user_image: user.photoURL,
+          review: review,
+          date: moment().from('YYYY-MM-DD')
+        }        
         
-        console.log(review);
+        fetch(`http://localhost:5000/addReview/${room._id}`, {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(userReview)
+        })
+        .then((response) => {
+          response.json();
+        })
+        .then((result) => setIsReviewed(result))
+        
+        toast.success("Review sucessfully added.");
+        e.target.reset()
       } else {
         toast.error("You can only review a room you have booked.");
       }
@@ -87,7 +101,15 @@ const RoomDetails = () => {
     fetch(`http://localhost:5000/rooms/${id}`)
       .then(response => response.json())
       .then(data => setRoom(data))
-  }, [])
+
+    if (user) {
+      fetch(`http://localhost:5000/bookingRoom?email=${user.email}`)
+        .then(res => res.json())
+        .then(result => {
+          setBookedRoom(result)
+        })
+    }
+  }, [isReviewed, bookedRoom])
 
   return (
     <div className='min-h-screen max-w-7xl mx-auto my-10'>
@@ -145,7 +167,7 @@ const RoomDetails = () => {
                 room?.reviews?.map((review) => {
                   return <div className='bg-base-100 p-2 rounded-lg border shadow'>
                     <div className='flex'>
-                      <img className='h-[50px] w-[50px] rounded-lg' src={review?.user_image} alt="" />
+                      <img className='h-[50px] w-[50px] rounded-full object-cover' src={review?.user_image} alt="" />
                       <div className='ml-4 w-full mb-5'>
                         <h1>{review?.name}</h1>
                         <p>{review?.booking_info?.date}</p>

@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 
 const MyBookings = () => {
   const [bookings, setBookings] = useState([]);
-  const { user } = useContext(AppContext);
+  const { user , isLoading} = useContext(AppContext);
   const today = moment().format('YYYY-MM-DD');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [singleBooking, setSingleBooking] = useState(null);
@@ -68,6 +68,7 @@ const MyBookings = () => {
   return (
     <div className='mt-6 min-h-screen p-2'>
       <h1 className='text-2xl font-semibold mb-3'>Booking</h1>
+      <h1>{isLoading && 'Loading....'}</h1>
       {bookings.length === 0 && <h1 className='text-xl font-semibold text-center mt-4'>You do not booked any room</h1>}
       <div className='grid lg:grid-cols-2 gap-1 grid-cols-1'>
         {bookings?.map((booking) => {
