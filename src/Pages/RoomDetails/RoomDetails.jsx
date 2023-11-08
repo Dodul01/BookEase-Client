@@ -171,7 +171,7 @@ const RoomDetails = () => {
             <h3 className='text-lg font-semibold'>Special Offer: {room?.special_offers}</h3>
           }
           <h3>Room Size: {room?.room_size}</h3>
-          <p>Status: {room?.availability === true ? 'Available' : 'Not Available'}</p>
+          {/* <p>Status: {room?.availability === true ? 'Available' : 'Not Available'}</p> */}
           <p>Seats Available: {room?.seats}</p>
         </div>
       </div>
