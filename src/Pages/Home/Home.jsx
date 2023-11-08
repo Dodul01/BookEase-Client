@@ -5,13 +5,28 @@ import FeaturedRooms from '../../Components/FeaturedRooms/FeaturedRooms'
 import SpecialOffers from '../../Components/SpecialOffers/SpecialOffers'
 import NewsLetter from '../../Components/NewsLetter/NewsLetter'
 
+
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+AOS.init();
+
+
 const Home = () => {
   return (
     <div>
       <Banner />
-      <FeaturedRooms />
-      <SpecialOffers />
-      <NewsLetter />
+      <div >
+        <FeaturedRooms />
+      </div>
+      <div>
+
+        <SpecialOffers />
+      </div>
+      <div>
+
+        <NewsLetter />
+      </div>
     </div>
   )
 }

@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import toast from 'react-hot-toast';
 import moment from 'moment/moment';
 
+
 const RoomDetails = () => {
   const { user } = useContext(AppContext);
   const [room, setRoom] = useState({});
@@ -15,11 +16,11 @@ const RoomDetails = () => {
   const [isReviewed, setIsReviewed] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
-  console.log(moment().format('YYYY-MM-DD'));
-  const minDate = () => {
-    const today = new Date().toISOString().split('T')[0];
-    return today;
-  };
+
+    const minDate = () => {
+      const today = new Date().toISOString().split('T')[0];
+      return today;
+    };
 
   const handleBooking = () => {
     if (date === null) {
@@ -115,7 +116,9 @@ const RoomDetails = () => {
           setBookedRoom(result)
         })
     }
+
   }, [isReviewed, bookedRoom])
+
 
   return (
     <div className='min-h-screen max-w-7xl mx-auto my-10'>
