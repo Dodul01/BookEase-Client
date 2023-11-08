@@ -17,7 +17,7 @@ const FeaturedRooms = () => {
     <div className='max-w-7xl mx-auto my-5'>
       <h1 className='text-2xl font-bold mb-2'>Take a dip at these featured rooms</h1>
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:gap-5 p-2">
-        {rooms?.map((featuredRoom, i) => {
+        {rooms?.map((featuredRoom) => {
           return <FeaturedRoomCard featuredRoom={featuredRoom}/>
         })}
       </div>

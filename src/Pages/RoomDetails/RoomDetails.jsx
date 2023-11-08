@@ -13,6 +13,9 @@ const RoomDetails = () => {
   const [date, setDate] = useState(null);
   const [bookedRoom, setBookedRoom] = useState([]);
   const [isReviewed, setIsReviewed] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
+  console.log(room);
 
   const minDate = () => {
     const today = new Date().toISOString().split('T')[0];
@@ -102,6 +105,11 @@ const RoomDetails = () => {
       .then(response => response.json())
       .then(data => setRoom(data))
 
+
+    if(room?.seats == 0){
+      setIsButtonDisabled(true)
+    }
+
     if (user) {
       fetch(`http://localhost:5000/bookingRoom?email=${user.email}`)
         .then(res => res.json())
@@ -138,7 +146,7 @@ const RoomDetails = () => {
               onChange={(e) => setDate(e.target.value)}
             />
           </div>
-          <button onClick={handleBooking} className='text-white bg-[#34977d] flex items-center justify-center w-full font-semibold p-2 rounded-lg'>Book Now</button>
+          <button onClick={handleBooking} className={`text-white bg-[#34977d] flex items-center justify-center w-full font-semibold p-2 rounded-lg ${isButtonDisabled && 'cursor-not-allowed bg-gray-400'}  `} disabled={isButtonDisabled}>Book Now</button>
         </div>
         <div className='lg:w-1/4 p-1'>
           <h2 className='text-xl font-bold'>Room Details</h2>
@@ -147,7 +155,7 @@ const RoomDetails = () => {
           }
           <h3>Room Size: {room?.room_size}</h3>
           <p>Status: {room?.availability === true ? 'Available' : 'Not Available'}</p>
-          <p>Seats Available: {room.seats}</p>
+          <p>Seats Available: {room?.seats}</p>
         </div>
       </div>
       <div className='my-4'>
