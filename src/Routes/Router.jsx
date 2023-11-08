@@ -10,6 +10,7 @@ import Event from "../Pages/Event&Activity/Event";
 import RoomDetails from "../Pages/RoomDetails/RoomDetails";
 import Signin from "../Pages/SignIn/Signin";
 import PrivateRoute from "./PrivateRouter";
+import Career from "../Pages/Career/Career";
 
 const router = createBrowserRouter([
   {
@@ -42,8 +43,8 @@ const router = createBrowserRouter([
         element: <AboutUs />
       },
       {
-        path: '/event&activity',
-        element: <Event />
+        path: '/career',
+        element: <Career />
       },
       {
         path: '/rooms/:id',

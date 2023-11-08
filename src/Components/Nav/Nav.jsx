@@ -13,7 +13,7 @@ const Nav = () => {
     <NavLink className='mx-2 font-medium' to='/'>Home</NavLink>
     <NavLink className='mx-2 font-medium' to='/rooms'>Rooms</NavLink>
     <NavLink className='mx-2 font-medium' to='/myBookings'>My Booking</NavLink>
-    <NavLink className='mx-2 font-medium' to='/event&activity'>Events & Activites</NavLink>
+    <NavLink className='mx-2 font-medium' to='/career'>Career Oppertunites</NavLink>
     <NavLink className='mx-2 font-medium' to='/about'>About Us</NavLink>
   </>
 
