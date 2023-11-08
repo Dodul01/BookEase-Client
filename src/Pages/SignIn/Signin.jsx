@@ -3,6 +3,7 @@ import { FcGoogle } from 'react-icons/fc'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { AppContext } from '../../AppContext/AppContextProvider'
 import toast from 'react-hot-toast'
+import { Helmet } from 'react-helmet-async'
 
 const Signin = () => {
   const { signInUser, signInUsingGoogle } = useContext(AppContext);
@@ -47,6 +48,9 @@ const Signin = () => {
 
   return (
     <div className='mt-6'>
+      <Helmet>
+        <title>BookEase - SignIn</title>
+      </Helmet>
       <div className="hero min-h-screen">
         <div className="hero-content flex-col lg:flex-row">
           <div className="text-center lg:block hidden lg:text-left">

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import RoomCard from '../../Components/RoomCard/RoomCard';
+import { Helmet } from 'react-helmet-async';
 
 const Rooms = () => {
   const [roomsData, setRoomsData] = useState([]);
@@ -21,7 +22,7 @@ const Rooms = () => {
       })
 
       setRooms(lowToHightSort)
-    } else if(e.target.value === 'none') {
+    } else if (e.target.value === 'none') {
       setRooms(roomsData);
     }
   }
@@ -39,6 +40,9 @@ const Rooms = () => {
 
   return (
     <div className='my-10 min-h-screen max-w-7xl mx-auto p-2'>
+      <Helmet>
+        <title>BookEase - Rooms</title>
+      </Helmet>
       <h2 className='text-2xl font-semibold my-2'>Available Rooms</h2>
       <div className='border-b-2 py-3 flex items-center'>
         <h3 className='font-bold mr-3'>Filter by Price</h3>

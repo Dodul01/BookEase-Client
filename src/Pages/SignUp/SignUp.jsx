@@ -5,6 +5,7 @@ import { AppContext } from '../../AppContext/AppContextProvider'
 import { getAuth, updateProfile } from 'firebase/auth'
 import app from '../../firebase/firebase.config'
 import toast from 'react-hot-toast'
+import { Helmet } from 'react-helmet-async'
 const SignUp = () => {
   const {signUpUser, signInUsingGoogle} = useContext(AppContext);
   const navigate = useNavigate()
@@ -49,6 +50,9 @@ const SignUp = () => {
 
   return (
     <div className='my-10'>
+      <Helmet>
+        <title>BookEase - SignUp</title>
+      </Helmet>
       <div className="hero min-h-screen">
         <div className="hero-content flex-col lg:flex-row">
           <div className="text-center lg:block hidden lg:text-left">

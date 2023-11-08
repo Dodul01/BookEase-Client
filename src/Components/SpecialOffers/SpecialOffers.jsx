@@ -38,7 +38,7 @@ const SpecialOffers = () => {
         className="mySwiper"
       >
         {specialOffers.map((specialOffer) => {
-          return <SwiperSlide>
+          return <SwiperSlide key={specialOffer._id}>
             <div className='relative'>
               <img className='w-full h-[50vh] object-cover rounded-lg' src={specialOffer.room_image} alt="special offer image" />
               <div className='absolute top-0 left-0 w-full h-full opacity-70 rounded-lg bg-black'>Hello</div>

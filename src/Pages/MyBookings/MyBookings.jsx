@@ -4,10 +4,11 @@ import moment from 'moment/moment';
 import Swal from 'sweetalert2';
 import Modal from '../../Components/Modal/Modal';
 import toast from 'react-hot-toast';
+import { Helmet } from 'react-helmet-async';
 
 const MyBookings = () => {
   const [bookings, setBookings] = useState([]);
-  const { user , isLoading} = useContext(AppContext);
+  const { user, isLoading } = useContext(AppContext);
   const today = moment().format('YYYY-MM-DD');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [singleBooking, setSingleBooking] = useState(null);
@@ -67,12 +68,15 @@ const MyBookings = () => {
 
   return (
     <div className='mt-6 min-h-screen p-2'>
+      <Helmet>
+        <title>BookEase - My Booking</title>
+      </Helmet>
       <h1 className='text-2xl font-semibold mb-3'>Booking</h1>
       <h1>{isLoading && 'Loading....'}</h1>
       {bookings.length === 0 && <h1 className='text-xl font-semibold text-center mt-4'>You do not booked any room</h1>}
       <div className='grid lg:grid-cols-2 gap-1 grid-cols-1'>
         {bookings?.map((booking) => {
-          return <div className='flex flex-wrap border p-2 rounded-lg'>
+          return <div key={booking._id} className='flex flex-wrap border p-2 rounded-lg'>
             <div>
               <img className='h-[230px]' src={booking?.room_image} alt="" />
             </div>

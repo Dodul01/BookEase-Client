@@ -4,6 +4,7 @@ import { AppContext } from '../../AppContext/AppContextProvider';
 import "react-datepicker/dist/react-datepicker.css";
 import toast from 'react-hot-toast';
 import moment from 'moment/moment';
+import { Helmet } from 'react-helmet-async';
 
 
 const RoomDetails = () => {
@@ -122,6 +123,9 @@ const RoomDetails = () => {
 
   return (
     <div className='min-h-screen max-w-7xl mx-auto my-10'>
+      <Helmet>
+        <title>BookEase - Room Details</title>
+      </Helmet>
       <div className='flex lg:flex-row flex-col gap-3 p-1'>
         <div className='flex-1'>
           <img className='rounded-lg w-full' src={room?.room_image} alt="room_image" />

@@ -8,6 +8,7 @@ import NewsLetter from '../../Components/NewsLetter/NewsLetter'
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { Helmet } from 'react-helmet-async'
 
 AOS.init();
 
@@ -15,18 +16,13 @@ AOS.init();
 const Home = () => {
   return (
     <div>
+      <Helmet>
+        <title>BookEase - Home</title>
+      </Helmet>
       <Banner />
-      <div >
-        <FeaturedRooms />
-      </div>
-      <div>
-
-        <SpecialOffers />
-      </div>
-      <div>
-
-        <NewsLetter />
-      </div>
+      <FeaturedRooms />
+      <SpecialOffers />
+      <NewsLetter />
     </div>
   )
 }

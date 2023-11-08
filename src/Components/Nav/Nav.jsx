@@ -38,7 +38,7 @@ const Nav = () => {
             <h2 className='font-mono text-3xl text-[#34977d] font-bold'>BookEase</h2>
             {/* Profile info */}
             {user ?
-              <Link to='/profile' className='md:flex hidden items-center justify-center gap-3 h-[45px] cursor-pointer ml-5 border p-2 rounded-full'>
+              <Link to='/' className='md:flex hidden items-center justify-center gap-3 h-[45px] cursor-pointer ml-5 border p-2 rounded-full'>
                 <img className='h-[30px] w-[30px] rounded-full object-cover' src={`${user?.photoURL}`} alt="" />
                 <div className='flex flex-col'>
                   <strong>{user?.displayName}</strong>
