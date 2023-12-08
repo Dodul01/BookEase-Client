@@ -1,8 +1,34 @@
-# React + Vite
+<h1 align="center"><a href="https://bookease-537ed.web.app/">BookEase</a></h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<h3>Project Features</h3>
+<ul>
+  <li>Email Password Authentication</li>
+  <li>Google Authentication</li>
+  <li>Protected/Private Route</li>
+  <li>User see featured room</li>
+  <li>User book room</li>
+  <li>User filter rooms by price</li>
+  <li>User can cancel room booking</li>
+  <li>If user book the room user can review the room</li>
+  <li>User can update there booking date.</li>
+  <li>Career opppertunities.</li>
+</ul>
 
-Currently, two official plugins are available:
+<h3>Technologies</h3>
+<ul>
+  <li>React</li>
+  <li>React Router Dom</li>
+  <li>Node JS</li>
+  <li>Express JS</li>
+  <li>MongoDB</li>
+  <li>Tailwind CSS</li>
+  <li>Daisy UI</li>
+  <li>AOS</li>
+  <li>React Hot Toast</li>
+  <li>Sweet Alert</li>
+  <li>Moment JS</li>
+  <li>Firebase Authentication</li>
+</ul>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<h3>Project Details</h3>
+<p>BookEase is a hotel booking website where user can book room.Only authorized user can book room an review room. User can only review the room they have booked. Users review will be publicly available any authorized or unauthorized user can see the review and user image.if user booked a room it will be added on there booking page. Unauthorized user can see the room details but can not book any room or review. Unauthorized users can not access my booking page.</p>
