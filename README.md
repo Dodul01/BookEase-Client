@@ -1,6 +1,6 @@
 <h1 align="center"><a href="https://bookease-537ed.web.app/">BookEase</a></h1>
 
-<h3>Project Key Features</h3>
+<h3>Project Features</h3>
 <ul>
   <li>Email Password Authentication</li>
   <li>Google Authentication</li>
